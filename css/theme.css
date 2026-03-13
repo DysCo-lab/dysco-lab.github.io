@@ -856,6 +856,23 @@ h4,
 	margin-bottom: 6px;
 }
 
+.module-grid .module-media {
+	text-align: center;
+}
+
+.module-grid .module-media img {
+	border-radius: 12px;
+	box-shadow: var(--shadow-soft);
+}
+
+.module-title a {
+	color: var(--ink);
+}
+
+.module-title a:hover {
+	color: var(--accent);
+}
+
 .card {
 	background: var(--surface);
 	border: 1px solid var(--border);
@@ -928,6 +945,12 @@ h4,
 	font-size: 12px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
+}
+
+.project-gallery img {
+	border-radius: 12px;
+	box-shadow: var(--shadow-soft);
+	margin-bottom: 12px;
 }
 
 .people-page .span8 section {

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520" role="img" aria-label="Module image placeholder">
+  <rect width="800" height="520" fill="#e8edf2"/>
+  <rect x="40" y="40" width="720" height="440" fill="#f7f9fb" stroke="#c6d0da" stroke-width="3"/>
+  <text x="400" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#7a8896">
+    Module image
+  </text>
+</svg>
