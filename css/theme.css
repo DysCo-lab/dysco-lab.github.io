@@ -693,6 +693,8 @@ h4,
 .site-nav .nav li {
 	display: block;
 	float: none;
+	width: auto;
+	flex: 0 0 auto;
 }
 
 .site-nav .nav li a {
