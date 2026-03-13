@@ -562,7 +562,8 @@ ul.sponsors {
 }
 
 #footer a img {
-	margin-top: 40px;
+	/* margin-top: 40px; */
+	width: 75%;
 }
 
 #footer p,
