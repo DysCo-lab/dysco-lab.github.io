@@ -19,3 +19,9 @@ git pull origin main
 ```
 
 If same files were edited by two different people then all conflits will appear and git inserts markers inside the file
+
+### After handling conflit
+
+```
+git push origin main
+```
