@@ -239,9 +239,17 @@ body>.navbar .brand:hover {
 	margin: 0;
 }
 
-#media .post_row .post .img img {
+/* #media .post_row .post .img img {
 	height: 275px;
 	width: 410px;
+} */
+
+#media .post_row .post .img img {
+	width: 100%;
+	height: 275px;
+	object-fit: cover;
+	border-radius: 12px;
+	display: block;
 }
 
 #media .post_row .post .text {
