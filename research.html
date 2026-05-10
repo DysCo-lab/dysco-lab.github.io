@@ -52,7 +52,7 @@
 
 <!-- ================= SIDEBAR ================= -->
 <div class="span3 bs-docs-sidebar" id="navparent">
-<ul class="nav nav-list bs-docs-sidenav" data-spy="affix" data-offset-top="200">
+<ul class="nav nav-list bs-docs-sidenav">
 
 <li><a href="#statement">Research Statement</a></li>
 
@@ -88,12 +88,15 @@
     </ul>
 </li>
 
-<li><a href="#cdfm">Computational and Data Driven Fluid Mechanics</a>
-    <a href="#ww" data-toggle="collapse" data-target="#ww-sub">Wind Wall</a>
-    <ul class="nav nav-list collapse" id="ww-sub" data-parent="#navparent">
-        <li><a href="#ww-aero">Scientific Machine Learning</a></li>
-        <li><a href="#ww-control">Fluid Flow Reconstruction</a></li>
-        <li><a href="#ww-piv">Optimal Control</a></li>
+<li>
+    <a href="#cdfm" data-toggle="collapse" data-target="#cdfm-sub">
+        Computational and Data Driven Fluid Mechanics
+    </a>
+
+    <ul class="nav nav-list collapse" id="cdfm-sub" data-parent="#navparent">
+        <li><a href="#cdfm-sml">Scientific Machine Learning</a></li>
+        <li><a href="#cdfm-ffr">Fluid Flow Reconstruction</a></li>
+        <li><a href="#cdfm-oc">Reduced Order Modeling and Aeroelasticity</a></li>
     </ul>
 </li>
 
@@ -105,7 +108,12 @@
     </ul>
 </li>
 
-<li><a href="#doc">Dynamics and Optimal Control</a></li>
+<li><a href="#doc">Dynamics Systems and Control</a>
+<ul class="nav nav-list collapse" id="ar-sub" data-parent="#navparent">
+        <li><a href="#doc-dd">Data-driven control</a></li>
+        <li><a href="#doc-op">Optimal control</a></li>
+    </ul>
+</li>
 
 <li>
     <a href="#vyom" data-toggle="collapse" data-target="#vyom-sub">VYOM</a>
@@ -117,7 +125,7 @@
     </ul>
 </li>
 
-<li><a href="#bam">Biomimetics and Analytical Models</a></li>
+<!-- <li><a href="#bam">Biomimetics and Analytical Models</a></li> -->
 
 </ul>
 </div>
@@ -151,9 +159,9 @@
         <p>Machine learning and operator-theoretic approaches for thermoacoustic dynamics.</p>
         </section>
     </div>
-    <div class="span4 module-media">
+    <!-- <div class="span4 module-media">
         <img src="images/placeholder-module.svg" alt="Thermoacoustics and Instabilities">
-    </div>
+    </div> -->
 </div>
 </section>
 
@@ -174,9 +182,9 @@
         <p>High-rate sensing and synchronization for aerial experiments.</p>
         </section>
     </div>
-    <div class="span4 module-media">
+    <!-- <div class="span4 module-media">
         <img src="images/placeholder-module.svg" alt="Learn to Fly">
-    </div>
+    </div> -->
 </div>
 </section>
 
@@ -202,9 +210,9 @@
         <p>High-resolution velocity field measurements.</p>
         </section>
     </div>
-    <div class="span4 module-media">
+    <!-- <div class="span4 module-media">
         <img src="images/placeholder-module.svg" alt="Wind Wall">
-    </div>
+    </div> -->
 </div>
 </section>
 
@@ -212,13 +220,47 @@
 
 <section id="cdfm" class="content-section">
 <div class="row-fluid module-grid">
+
     <div class="span8">
-        <h3 class="module-title"><a href="computational-data-driven-fluid-mechanics.html">Computational and Data Driven Fluid Mechanics</a></h3>
-        <p>Content coming soon.</p>
+
+        <h3 class="module-title">
+            <a href="computational-data-driven-fluid-mechanics.html">
+                Computational and Data Driven Fluid Mechanics
+            </a>
+        </h3>
+        <section id="cdfm-sml">
+            <h4>Scientific Machine Learning</h4>
+            <p>
+                Neural operators, graph neural networks, and operator-learning
+                frameworks for fluid dynamics and surrogate modeling.
+            </p>
+        </section>
+
+        <section id="cdfm-ffr">
+            <h4>Fluid Flow Reconstruction</h4>
+            <p>
+                Data-driven reconstruction of vortex-dominated and unsteady flow
+                fields using reduced-order and learning-based approaches.
+            </p>
+        </section>
+
+        <section id="cdfm-oc">
+            <h4>Reduced Order Modeling and Aeroelasticity</h4>
+            <p>
+                Development of reduced-order models, aeroelastic solvers,
+                vortex-particle simulations, and coupled fluid-structure
+                interaction frameworks using in-house computational tools.
+            </p>
+        </section>
+
     </div>
-    <div class="span4 module-media">
-        <img src="images/placeholder-module.svg" alt="Computational and Data Driven Fluid Mechanics">
-    </div>
+
+    <!-- <div class="span4 module-media">
+        <img src="research/cdfm/2.png"
+             alt="Computational and Data Driven Fluid Mechanics"
+             style="width:100%;">
+    </div> -->
+
 </div>
 </section>
 
@@ -230,18 +272,19 @@
         <h3 class="module-title"><a href="network-of-oscillators.html">Network of Oscillators</a></h3>
 
         <section id="ar-vol">
-        <h4>Kuromoto</h4>
+        <h4>Kuromoto Model</h4>
+        <h4>Modelling Cyber-Physical Attacks with Laplacian dynamics</h4>
         <p></p>
         </section>
 
         <section id="ar-elem">
-        <h4>Recurrence plots</h4>
-        <p>Time-dependent system analysis for field-deployable platforms.</p>
+        <h4>Recurrence Plots</h4>
+        <!-- <p>Time-dependent system analysis for field-deployable platforms.</p> -->
         </section>
     </div>
-    <div class="span4 module-media">
+    <!-- <div class="span4 module-media">
         <img src="images/placeholder-module.svg" alt="Network of Oscillators">
-    </div>
+    </div> -->
 </div>
 </section>
 
@@ -251,11 +294,19 @@
 <div class="row-fluid module-grid">
     <div class="span8">
         <h3 class="module-title"><a href="dynamics-optimal-control.html">Dynamics and Optimal Control</a></h3>
-        <p>Content coming soon.</p>
+        <section id="doc-dd">
+        <h4>Hardware-in-loop control</h4>
+        <h4>Koopman Operator control</h4>
+        </section>
+        <section id="doc-oc">
+        <h4>Sequential Convex Programming</h4>
+        <h4>Safe control</h4>
+        </section>    
+        <!-- <p>Time-dependent system analysis for field-deployable platforms.</p> -->
     </div>
-    <div class="span4 module-media">
+    <!-- <div class="span4 module-media">
         <img src="images/placeholder-module.svg" alt="Dynamics and Optimal Control">
-    </div>
+    </div> -->
 </div>
 </section>
 
@@ -280,15 +331,15 @@
         </p>
         </section>
     </div>
-    <div class="span4 module-media">
+    <!-- <div class="span4 module-media">
         <img src="images/placeholder-module.svg" alt="VYOM">
-    </div>
+    </div> -->
 </div>
 </section>
 
 <hr>
 
-<section id="bam" class="content-section">
+<!-- <section id="bam" class="content-section">
 <div class="row-fluid module-grid">
     <div class="span8">
         <h3 class="module-title"><a href="biomimetics-analytical-models.html">Biomimetics and Analytical Models</a></h3>
@@ -298,7 +349,7 @@
         <img src="images/placeholder-module.svg" alt="Biomimetics and Analytical Models">
     </div>
 </div>
-</section>
+</section> -->
 
 </div>
 </div>
