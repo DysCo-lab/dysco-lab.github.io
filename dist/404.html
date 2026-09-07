@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>DysCo Lab</title>
+    <script>
+      // GitHub Pages serves 404.html for unknown paths. Our app uses hash
+      // routing. We redirect unknown paths to the site root while preserving
+      // the path as a hash (e.g. /people -> ./#/people). We resolve the base
+      // path at runtime so this works both for user pages (served at /) and
+      // project pages (served at /<repo>/).
+      (function () {
+        var path = window.location.pathname;
+        // The 404 page lives at the site root (either / or /<repo>/).
+        var segments = path.split("/").filter(Boolean);
+        // If this is a project page, the first segment is the repo name.
+        // We can detect it by checking whether the last known site root
+        // matches our known file structure; but for simplicity we always
+        // redirect back to the same directory this 404 lives in, which is
+        // the Pages root for this repo.
+        var base = window.location.pathname.replace(/\/[^/]*$/, "/");
+        // Strip the base to get the unknown remainder.
+        var rel = path.indexOf(base) === 0 ? path.slice(base.length) : "";
+        var target = base + (rel ? "#/" + rel.replace(/\/+$/, "") : "");
+        window.location.replace(target);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting…</p>
+  </body>
+</html>
