@@ -12,7 +12,6 @@ const NAV: { label: string; route: Route }[] = [
   { label: "People", route: "people" },
   { label: "Publications", route: "publications" },
   { label: "Schedule", route: "schedule" },
-  { label: "Projects", route: "projects-sheet" },
   { label: "Join / Contact", route: "join" },
 ];
 

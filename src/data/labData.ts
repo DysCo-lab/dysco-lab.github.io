@@ -42,10 +42,6 @@ export const lab = {
   piCalendarUrl:
     "https://calendar.google.com/calendar/embed?mode=WEEK&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=0&showCalendars=0&height=400&src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata",
   // Google Sheet published as HTML (File → Share → Publish to web → Embed).
-  projectsSheetUrl:
-    "https://docs.google.com/spreadsheets/d/12345abcdef/pubhtml?widget=true&amp;headers=false",
-  projectsSheetEditUrl:
-    "https://docs.google.com/spreadsheets/d/12345abcdef/edit",
 };
 
 // ------------------------- PEOPLE -------------------------

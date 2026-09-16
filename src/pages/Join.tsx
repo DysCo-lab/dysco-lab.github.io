@@ -5,16 +5,16 @@ export default function Join() {
     <div>
       <div className="section-title">Join / Contact</div>
 
-      <p>
+      {/* <p>
         We are always looking for motivated students (BTP, MS, PhD), interns,
         and postdoctoral candidates with a background or strong interest in
         dynamics, control, fluid mechanics, thermoacoustics, applied
         mathematics, or robotics.
-      </p>
+      </p> */}
 
       <div className="subsection-title">How to join</div>
       <p>
-        Admission to the PhD, MS (by Research), and BTech programs at IIT
+        Admission to the PhD, M.Tech (RA/TA), and BTech programs at IIT
         Hyderabad is handled through the regular institute admission process;
         please see the{" "}
         <a href="https://iith.ac.in" target="_blank" rel="noreferrer">
@@ -27,16 +27,7 @@ export default function Join() {
         yourself. Please include:
       </p>
       <ul style={{ fontSize: 14, paddingLeft: 20 }}>
-        <li>a short CV (at most two pages),</li>
-        <li>
-          a brief description of your research interests (half a page is
-          plenty) and why you are interested in DysCo specifically,
-        </li>
-        <li>
-          for postdocs: a research statement and 1–2 representative
-          publications,
-        </li>
-        <li>names and contact details of two references.</li>
+        <li>A CV, and a brief description of your research interests, and why you are interested in DysCo specifically.</li>
       </ul>
 
       <div className="subsection-title">Mailing list</div>
@@ -56,7 +47,7 @@ export default function Join() {
         </li>
       </ul>
 
-      <div className="subsection-title">Student openings</div>
+      {/* <div className="subsection-title">Student openings</div>
       <ul className="info-list">
         <li>
           <b>PhD positions:</b> Candidates with a Master’s in Mechanical,
@@ -82,7 +73,7 @@ export default function Join() {
           two references; we can also support applications for NPDF, DST
           Inspire Faculty, etc.
         </li>
-      </ul>
+      </ul> */}
 
       <div className="subsection-title">Contact</div>
       <address
@@ -93,9 +84,7 @@ export default function Join() {
         }}
       >
         <div style={{ fontWeight: 600 }}>{lab.longName}</div>
-        {lab.address.map((line, i) => (
-          <div key={i}>{line}</div>
-        ))}
+        <p>Academic Block C - 307, 617, 619, and 530 rooms are part of the DysCo lab.</p>
         <div style={{ marginTop: 6 }}>
           Email:{" "}
           <a href={`mailto:${lab.email}`}>{lab.email}</a>

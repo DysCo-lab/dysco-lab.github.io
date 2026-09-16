@@ -7,7 +7,6 @@ import Research from "./pages/Research";
 import People from "./pages/People";
 import Publications from "./pages/Publications";
 import Schedule from "./pages/Schedule";
-import ProjectSheet from "./pages/ProjectSheet";
 import Join from "./pages/Join";
 import ProjectDetail from "./pages/ProjectDetail";
 
@@ -31,9 +30,6 @@ export default function App() {
       break;
     case "schedule":
       content = <Schedule />;
-      break;
-    case "projects-sheet":
-      content = <ProjectSheet />;
       break;
     case "join":
       content = <Join />;
