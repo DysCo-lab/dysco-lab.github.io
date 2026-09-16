@@ -519,11 +519,11 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "thermoacoustics-instabilities",
-    title: "Thermoacoustics and Instabilities",
-    image: "thermoacoustics.jpg",
+    slug: "Instabilities",
+    title: "Thermoacoustics and Aeroelasticity",
+    image: "flutter.png",
     summary:
-      "Identification of thermoacoustic instability mechanisms using reduced-order and data-driven models.",
+      "Identification of thermoacoustic instability and aeroelastic flutter using reduced-order and data-driven models.",
     memberIds: [],
     longDescription: "",
     links: [
@@ -603,6 +603,32 @@ export const projects: Project[] = [
       },
     ],
   },
+    {
+    slug: "network-of-oscillators",
+    title: "Network of Oscillators",
+    image: "networks.png",
+    summary:
+      "Markov Processes, Clustering, Recurrence plots, and modelling cyber-physical attacks with Laplacian dynamics.",
+    memberIds: [],
+    longDescription: "",
+    links: [
+      { label: "Kuramoto oscillators", url: "#ar-vol" },
+      { label: "Recurrence plots", url: "#ar-elem" },
+    ],
+  },
+    {
+    slug: "dynamics-optimal-control",
+    title: "Dynamics and Optimal Control",
+    image: "optimalctrl.png",
+    summary:
+      "Hardware-in-loop control, Koopman operator control, sequential convex programming, and safe control.",
+    memberIds: [],
+    longDescription: "",
+    links: [
+      { label: "Data-driven control", url: "#doc-dd" },
+      { label: "Optimal control", url: "#doc-op" },
+    ],
+  },
   {
     slug: "fod",
     title: "FOD (Foreign Object Debris)",
@@ -621,32 +647,6 @@ export const projects: Project[] = [
     ],
     longDescription: "",
     links: [],
-  },
-  {
-    slug: "dynamics-optimal-control",
-    title: "Dynamics and Optimal Control",
-    image: "optimalctrl.png",
-    summary:
-      "Hardware-in-loop control, Koopman operator control, sequential convex programming, and safe control.",
-    memberIds: [],
-    longDescription: "",
-    links: [
-      { label: "Data-driven control", url: "#doc-dd" },
-      { label: "Optimal control", url: "#doc-op" },
-    ],
-  },
-  {
-    slug: "network-of-oscillators",
-    title: "Network of Oscillators",
-    image: "networks.jpg",
-    summary:
-      "Kuramoto oscillators, recurrence plots, and modelling cyber-physical attacks with Laplacian dynamics.",
-    memberIds: [],
-    longDescription: "",
-    links: [
-      { label: "Kuramoto oscillators", url: "#ar-vol" },
-      { label: "Recurrence plots", url: "#ar-elem" },
-    ],
   },
   {
     slug: "vyom",

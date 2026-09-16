@@ -31,7 +31,7 @@ export default function Publications() {
     <div>
       <div className="section-title">Publications</div>
       <p style={{ fontSize: 13.5, color: "var(--color-muted)", marginBottom: 18 }}>
-        Authors marked with <b style={{ color: "var(--color-ink)" }}>*</b> are
+        Authors marked with <b style={{ color: "var(--color-ink)" }}>*</b> are non
         DysCo Lab members.
       </p>
 

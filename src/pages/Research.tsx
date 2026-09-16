@@ -12,11 +12,11 @@ export default function Research({ navigate }: Props) {
     <div>
       <div className="section-title">Research</div>
       <p style={{ marginBottom: 22, maxWidth: 720 }}>
-        Our research spans nonlinear dynamics, thermoacoustics, data-driven
+        {/* Our research spans nonlinear dynamics, thermoacoustics, data-driven
         modeling, and the control of aerial robotic systems. A common thread is
         a tight coupling between analysis, simulation, and physical experiment.
         Each active project is listed below; click through for descriptions,
-        involved students, and related papers.
+        involved students, and related papers. */}
       </p>
       <div className="project-grid">
         {projects.map((p) => (

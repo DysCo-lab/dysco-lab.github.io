@@ -16,11 +16,10 @@ export default function Home({ navigate }: Props) {
     <div>
       {/* Intro paragraph – matches the original DysCo wording */}
       <p className="hero">
-        The <b>{lab.longName}</b> in <b>{lab.department}</b> at{" "}
-        <b>{lab.institution}</b> studies nonlinear systems, fluid dynamics, and
-        thermoacoustics with a strong focus on data-driven modeling,
-        distributed control, and experimental validation. We combine
-        analytical theory, numerical simulation, and table-top experiments.
+        Welcome to the <b>{lab.longName}</b> in the {lab.department} at{" "}
+        <b>{lab.institution}</b>. We study a variety of interdisciplinary problems centered around <b>modeling and control of complex
+        systems</b>. Primary systems under study involve <b>thermoacoustic</b> instabilities, robotic systems inpsired by <b>biomimicry</b>, and <b>unsteady fluid flows</b>. 
+        We also have a range of start-ups incubated, which focus on multirotor <b>autonomous aerial</b> vehicles, <b>reusable launch</b> vehicles. 
       </p>
 
       {/* Image slider */}
@@ -29,9 +28,9 @@ export default function Home({ navigate }: Props) {
       {/* Research */}
       <div className="section-title">Research</div>
       <p style={{ fontSize: 14, color: "var(--color-muted)", maxWidth: 720, marginBottom: 18 }}>
-        Our work is organized around three closely connected thrusts:
-        thermoacoustics &amp; instabilities, dynamical systems &amp; control,
-        and complex systems (networks, fluids, and data-driven methods).
+        {/* Our work is organized around three closely connected thrusts:
+        complex systems &amp; instabilities, dynamical systems &amp; control,
+        and complex systems (networks, fluids, and data-driven methods). */}
       </p>
       <div className="project-grid">
         {featured.map((p) => (
