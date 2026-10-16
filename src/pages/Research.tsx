@@ -49,25 +49,24 @@ export default function Research({ navigate }: Props) {
               </a>
             </div>
             <div className="people-row">
-              {p.memberIds.map((mid) => {
-                const person = people.find((x) => x.id === mid);
-                if (!person) return null;
+              {(() => {
+                const lead = p.leadId ? people.find((x) => x.id === p.leadId) ?? null : null;
+                if (!lead) return null;
                 return (
                   <a
-                    key={mid}
-                    href={person.website ?? "#/people"}
-                    title={person.name}
+                    href={lead.website ?? "#/people"}
+                    title={`${lead.name} — project lead`}
                     onClick={(e) => {
-                      if (!person.website) {
+                      if (!lead.website) {
                         e.preventDefault();
                         navigate("people");
                       }
                     }}
                   >
-                    <Avatar person={person} size={34} circle />
+                    <Avatar person={lead} size={34} circle />
                   </a>
                 );
-              })}
+              })()}
             </div>
           </div>
         ))}

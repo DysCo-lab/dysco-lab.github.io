@@ -505,10 +505,17 @@ export type Project = {
   title: string;
   shortTitle?: string;
   summary: string;
-  image: string;            // filename inside /images/projects/
-  gallery?: string[];       // additional slides for the project page
-  memberIds: string[];
-  longDescription: string;  // can contain multiple paragraphs (use \n\n)
+  image: string; // filename inside /images/projects/
+  gallery?: string[]; // additional slides for the project page
+  methodology?: string;
+  methodologyImages?: string[];
+  videoUrl?: string;
+  videoTitle?: string;
+  results?: string;
+  resultsImages?: string[];
+  leadId?: string; // single person in charge for the project
+  memberIds?: string[]; // optional legacy field; not displayed on project pages
+  longDescription: string; // can contain multiple paragraphs (use \n\n)
   links?: { label: string; url: string }[];
   active?: boolean;
 };
@@ -520,12 +527,11 @@ export const projects: Project[] = [
     image: "flutter.png",
     summary:
       "Identification of thermoacoustic instability and aeroelastic flutter using reduced-order and data-driven models.",
-    memberIds: [],
+    leadId: "tathagat-sarangi",
     longDescription: "",
     links: [
-      { label: "System Identification", url: "#ta-pen" },
-      { label: "Data-driven Modelling", url: "#ta-ddm" },
-      { label: "Reduced Order Modelling", url: "#ta-rom" },
+      { label: "Project paper", url: "https://example.com/thermoacoustics-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
     ],
   },
   {
@@ -534,95 +540,103 @@ export const projects: Project[] = [
     image: "LTF.png",
     summary:
       "Experimental platforms and data-driven methods for flight dynamics and control validation.",
-    memberIds: [],
+    leadId: "yashwanth",
     longDescription: "",
     links: [
-      { label: "5-DOF Gimbal Structure", url: "#ltf-gimbal" },
-      { label: "Coupled System dynamics", url: "#ltf-da" },
-      { label: "Data-driven fluid mechanics", url: "#ltf-dd" },
-      { label: "Vortex Particle simulations", url: "#ltf-vpm" },
+      { label: "Project paper", url: "https://example.com/learn-to-fly-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
+      { label: "Project video", url: "https://www.youtube.com/" },
     ],
   },
+
+
+
+
+
   {
     slug: "wind-wall",
     title: "Wind Wall",
     shortTitle: "Wind Wall",
-    image: "ww1.jpg",
+    image: "ww1.png",
     summary:
       "An unsteady wind generator for simulating flight-relevant flow conditions for unmanned aerial vehicles.",
     gallery: [
-      "ww2.jpeg",
-      "ww3.jpg",
-      "ww4.jpg",
-      "ww5.jpg",
+      "ww2.jpg",
+      "ww3.png",
+      "ww4.png",
+      "ww5.png",
     ],
+    methodology:
+      "The system consists of 400 individually controllable custom-designed Electric Ducted Fans (EDFs), arranged in a square grid covering an area of  2.4 m × 2.4 m. The facility is designed to generate wind speeds of up to 15 m/s in the open configuration and approximately 50 m/s when the flow is converged to a 0.8 m * 0.8 m test section.  The fan array is first characterised through experimental measurements such as Particle Image Velocimetry (PIV) and Hot-wire Anemometry (HWA) to establish the relationship between individual fan operating conditions and the resulting three-dimensional flow field. The generated flows will further be experimentally calibrated and validated, followed by integration with the existing wind-tunnel facility to study scaling effects and higher-speed unsteady flows. A dedicated GUI provides an interface for specifying and reproducing desired wind conditions for UAV testing.",
+    methodologyImages: ["ww2.jpg", "ww3.png", "ww4.png", "ww5.png"],
+    videoUrl: "",
+    videoTitle: "Wind Wall overview",
+    results:
+      "The facility enables repeatable testing of UAV stability, aerodynamic response, and control under controlled disturbance fields. Results can be added here to describe observed behavior, performance trends, and validation data.",
+    resultsImages: ["ww6.png","ww7.png"],
+    leadId: "misbah-tahir",
     memberIds: [
-      "phd-misbah",
-      "ms-mandar",
-      "ms-manthan",
-      "ms-akash",
-      "ms-siri",
-      "ms-akhila",
-      "staff-nitish",
-      "staff-mirzapur",
-      "staff-madhu",
-      "staff-kranthi",
-      "staff-abhinav",
-      "alum-naresh",
+      "misbah-tahir",
+      "mandar-mane",
+      "manthan-suryvanshi",
+      "akash-mavurapu",
+      "ravula-siri-reddy",
+      "akhila-shibu",
+      "nitish-kashyap",
+      "mirzapur-naresh",
+      "m-madhusudhan-reddy",
+      "kranthikiran",
+      "abhinav-tj",
     ],
     longDescription:
       "The project aims to develop an Unsteady Wind Generator for producing controlled, spatially non-uniform, and time-varying airflow fields for flight-relevant disturbance testing of micro and nano UAVs. Using an array of 400 individually controlled fans, the system can generate prescribed wind profiles with controlled spatial and temporal characteristics, enabling repeatable simulation of complex atmospheric disturbances in a laboratory environment. The objective is to characterize the flow generated by the fan array, develop computational and control methodologies for mapping desired wind conditions to fan operating inputs, and provide a user interface for specifying and reproducing wind profiles. The facility will ultimately enable systematic investigation of UAV stability, aerodynamics, maneuverability, and control under controlled unsteady flow conditions, while providing a basis for the development and scaling of larger unsteady wind-generation facilities.",
     links: [
-      { label: "Unsteady Aerodynamics", url: "#ww-aero" },
-      { label: "System Control", url: "#ww-control" },
-      { label: "Large-scale PIV", url: "#ww-piv" },
-      { label: "PWM control - FPGA, STM32", url: "#ww-fpga" },
-      { label: "Flight stability analysis", url: "#ww-stable" },
-      { label: "Propeller design", url: "#ww-fan" },
-      { label: "Structural design", url: "#ww-structure" },
+      { label: "Project paper", url: "https://example.com/wind-wall-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
+      // { label: "Project video", url: "https://drive.google.com/file/d/1Y8FSQRGFtqzWIFlZASYlGWP88jkusxk-/view/" }
+      { label: "Project video", url: "youtube.com" },
     ],
   },
-    {
+
+
+
+  {
     slug: "computational-data-driven-fluid-mechanics",
     title: "Computational and Data Driven Fluid Mechanics",
     image: "varflexi.png",
     summary:
       "Scientific machine learning, flow reconstruction, and reduced-order modeling for fluid dynamics.",
-    memberIds: [],
+    leadId: "ashik-lal-krishna",
     longDescription: "",
     links: [
-      { label: "Scientific Machine Learning", url: "#cdfm-sml" },
-      { label: "Fluid Flow Reconstruction", url: "#cdfm-ffr" },
-      {
-        label: "Reduced Order Modeling and Aeroelasticity",
-        url: "#cdfm-oc",
-      },
+      { label: "Project paper", url: "https://example.com/cfdm-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
     ],
   },
-    {
+  {
     slug: "network-of-oscillators",
     title: "Network of Oscillators",
     image: "networks.png",
     summary:
       "Markov Processes, Clustering, Recurrence plots, and modelling cyber-physical attacks with Laplacian dynamics.",
-    memberIds: [],
+    leadId: "tathagat-sarangi",
     longDescription: "",
     links: [
-      { label: "Kuramoto oscillators", url: "#ar-vol" },
-      { label: "Recurrence plots", url: "#ar-elem" },
+      { label: "Project paper", url: "https://example.com/network-oscillators-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
     ],
   },
-    {
+  {
     slug: "dynamics-optimal-control",
     title: "Dynamics and Optimal Control",
     image: "optimalctrl.png",
     summary:
       "Hardware-in-loop control, Koopman operator control, sequential convex programming, and safe control.",
-    memberIds: [],
+    leadId: "yashwanth",
     longDescription: "",
     links: [
-      { label: "Data-driven control", url: "#doc-dd" },
-      { label: "Optimal control", url: "#doc-op" },
+      { label: "Project paper", url: "https://example.com/dynamics-control-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
     ],
   },
   {
@@ -637,10 +651,8 @@ export const projects: Project[] = [
       "fod3.jpg",
       "fod4.jpg",
     ],
-    memberIds: [
-      "staff-madhu",
-      "staff-abhinav",
-    ],
+    leadId: "m-madhusudhan-reddy",
+    memberIds: ["m-madhusudhan-reddy", "abhinav-tj"],
     longDescription: "",
     links: [],
   },
@@ -653,12 +665,12 @@ export const projects: Project[] = [
     gallery: [
       "vyom2.png",
     ],
-    memberIds: [],
+    leadId: "edmeachew-ayal",
     longDescription: "",
     links: [
-      { label: "Complex systems", url: "#vyom-complex" },
-      { label: "Physiological Signals", url: "#vyom-phys" },
-      { label: "Muscle monitor", url: "#vyom-muscle" },
+      { label: "Project paper", url: "https://example.com/vyom-paper" },
+      { label: "Project code", url: "https://github.com/DysCo-lab" },
+      { label: "Project video", url: "https://www.youtube.com/" },
     ],
   },
 ];

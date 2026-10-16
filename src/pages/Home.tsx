@@ -63,25 +63,24 @@ export default function Home({ navigate }: Props) {
               </a>
             </div>
             <div className="people-row">
-              {p.memberIds.map((mid) => {
-                const person = people.find((x) => x.id === mid);
-                if (!person) return null;
+              {(() => {
+                const lead = p.leadId ? people.find((x) => x.id === p.leadId) ?? null : null;
+                if (!lead) return null;
                 return (
                   <a
-                    key={mid}
-                    href={person.website ?? "#/people"}
+                    href={lead.website ?? "#/people"}
                     onClick={(e) => {
-                      if (!person.website) {
+                      if (!lead.website) {
                         e.preventDefault();
                         navigate("people");
                       }
                     }}
-                    title={person.name}
+                    title={`${lead.name} — project lead`}
                   >
-                    <Avatar person={person} size={34} circle />
+                    <Avatar person={lead} size={34} circle />
                   </a>
                 );
-              })}
+              })()}
             </div>
           </div>
         ))}

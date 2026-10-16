@@ -1,15 +1,31 @@
 import type { Route } from "../hooks/useHashRoute";
 import { projects, people } from "../data/labData";
-import Avatar from "../components/Avatar";
 import { useState } from "react";
-import AuthorThumb from "../components/AuthorThumb";
+import Avatar from "../components/Avatar";
 import ImageGrid from "../components/ImageGrid";
-import { publications } from "../data/labData";
 
 type Props = {
   slug: string;
   navigate: (r: Route, param?: string) => void;
 };
+
+function resolveVideoEmbedUrl(url?: string): string | null {
+  if (!url) return null;
+
+  if (/youtube|youtu\.be/i.test(url)) {
+    const ytIdMatch = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{6,})/);
+    const id = ytIdMatch ? ytIdMatch[1] : null;
+    return id ? `https://www.youtube.com/embed/${id}` : null;
+  }
+
+  if (/drive\.google\.com/i.test(url)) {
+    const idMatch = url.match(/[-\w]{25,}/);
+    const id = idMatch ? idMatch[0] : null;
+    return id ? `https://drive.google.com/file/d/${id}/preview` : null;
+  }
+
+  return null;
+}
 
 export default function ProjectDetail({ slug, navigate }: Props) {
   const project = projects.find((p) => p.slug === slug);
@@ -36,10 +52,21 @@ export default function ProjectDetail({ slug, navigate }: Props) {
     );
   }
 
-  const members = project.memberIds
-    .map((id) => people.find((p) => p.id === id))
-    .filter(Boolean) as typeof people;
-  const lead = members[0] ?? null;
+  const lead = project.leadId ? people.find((p) => p.id === project.leadId) ?? null : null;
+  const methodologyImages = project.methodologyImages ?? project.gallery ?? [];
+  const resultsImages = project.resultsImages ?? [];
+  const projectLinks =
+    (project.links ?? []).filter((link) => !!link.url && !link.url.startsWith("#"))
+      .length > 0
+      ? (project.links ?? []).filter((link) => !!link.url && !link.url.startsWith("#"))
+      : [
+          { label: "Project paper", url: "https://example.com/project-paper" },
+          { label: "Project code", url: "https://github.com/DysCo-lab" },
+        ];
+  const videoEmbedUrl =
+    resolveVideoEmbedUrl(project.videoUrl) ??
+    projectLinks.map((l) => resolveVideoEmbedUrl(l.url)).find(Boolean) ??
+    null;
 
   return (
     <div className="project-detail">
@@ -56,12 +83,6 @@ export default function ProjectDetail({ slug, navigate }: Props) {
       </div>
 
       <h2>{project.title}</h2>
-
-      {lead && (
-        <div style={{ margin: "12px 0" }}>
-          <AuthorThumb person={lead} size={64} />
-        </div>
-      )}
 
       <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
         <div style={{ flex: "0 0 48%" }}>
@@ -93,134 +114,94 @@ export default function ProjectDetail({ slug, navigate }: Props) {
             </div>
           )}
 
-
-          {/* Publications & Code (project-specific links shown inline when possible) */}
           <div style={{ marginTop: 12 }}>
-            <div className="subsection-title">Publications & Code</div>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 14 }}>
-              {publications.map((p, i) => (
-                <li key={i} style={{ padding: "4px 0" }}>
-                  {p.title} — {p.venue} ({p.year})
-                  {p.links?.[0] && /arxiv|preprint/i.test(p.links[0].label || p.links[0].url || "") && (
-                    <a href={p.links[0].url} target="_blank" rel="noreferrer"> [{p.links[0].label}]</a>
-                  )}
-                </li>
-              ))}
-
-              {/* Project-specific code / external links (github, arxiv) */}
-              {project.links?.filter(Boolean).map((l, i) => {
-                const isVideo = /youtube|youtu\.be|drive\.google\.com/i.test(l.url);
-                const isCode = /github|gitlab|bitbucket/i.test(l.url);
-                const isArxiv = /arxiv/i.test(l.url) || /arxiv/i.test(l.label || "");
-                // show inline label; link if it's arxiv or code or video
-                return (
-                  <li key={`pl-${i}`} style={{ padding: "4px 0" }}>
+            <div className="project-detail-section-title">Publications &amp; code</div>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 15 }}>
+              {projectLinks.map((l, i) => (
+                <li key={`pl-${i}`} style={{ padding: "4px 0" }}>
+                  <a
+                    href={l.url}
+                    target={l.url.startsWith("#") ? undefined : "_blank"}
+                    rel={l.url.startsWith("#") ? undefined : "noreferrer"}
+                  >
                     {l.label}
-                    {(isCode || isArxiv) && (
-                      <a href={l.url} target="_blank" rel="noreferrer"> [{l.label}]</a>
-                    )}
-                    {!isCode && !isArxiv && !isVideo && (
-                      <span> — {l.url}</span>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Publications: lightweight list (could be filtered per project later) */}
-          <div style={{ marginTop: 12 }}>
-            <div className="subsection-title">Publications & Code</div>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: 14 }}>
-              {publications.map((p, i) => (
-                <li key={i} style={{ padding: "4px 0" }}>
-                  {p.title} — {p.venue} ({p.year}) {p.links?.[0] && (
-                    <a href={p.links[0].url} target="_blank" rel="noreferrer"> [{p.links[0].label}]</a>
-                  )}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
-
         </div>
 
-        <div style={{ flex: "1 1 52%" }}>
-          {/* Abstract / long description placed at top (no title) */}
-          {project.longDescription
-            .split(/\n\n/)
-            .map((para, i) => (
-              <p key={i} style={{ marginBottom: "0.9em" }}>
-                {para}
-              </p>
-            ))}
+        <div style={{ flex: "1 1 52%" }} className="project-detail-body">
+          {(project.longDescription ? project.longDescription.split(/\n\n/) : ["Project description coming soon."]).map((para, i) => (
+            <p key={i} style={{ marginBottom: "0.9em" }}>
+              {para}
+            </p>
+          ))}
         </div>
       </div>
 
-      {/* Methodology section */}
-      <div style={{ marginTop: 20 }}>
-        <div className="subsection-title">Methodology</div>
-        <div style={{ marginTop: 8 }}>
-          {/* placeholder: allow text or image */}
-          {project.gallery && project.gallery.length > 0 ? (
-            <ImageGrid images={project.gallery} size={160} />
-          ) : (
-            <p style={{ marginBottom: 8 }}>Describe methodology here.</p>
-          )}
+      <div style={{ marginTop: 28 }}>
+        <div className="project-detail-section-title">Methodology</div>
 
-          {/* Video preview: if project.links contains a YouTube or Drive link, embed preview */}
-          {project.links?.find((l) => /youtube|youtu\.be|drive\.google\.com/i.test(l.url)) && (
-            <div style={{ marginTop: 12 }}>
-              {project.links!.map((l, i) => {
-                if (/youtube|youtu\.be/i.test(l.url)) {
-                  // Normalize YouTube to embed URL
-                  const ytIdMatch = l.url.match(/(v=|youtu\.be\/)??([A-Za-z0-9_-]{6,})/);
-                  const id = ytIdMatch ? ytIdMatch[2] : null;
-                  if (!id) return null;
-                  return (
-                    <div key={i} style={{ marginTop: 8 }}>
-                      <iframe
-                        width="560"
-                        height="315"
-                        src={`https://www.youtube.com/embed/${id}`}
-                        title={l.label || "Video"}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  );
-                }
-                if (/drive\.google\.com/i.test(l.url)) {
-                  // Attempt to extract file ID and embed (works for viewers)
-                  const idMatch = l.url.match(/[-\w]{25,}/);
-                  const id = idMatch ? idMatch[0] : null;
-                  if (!id) return null;
-                  return (
-                    <div key={i} style={{ marginTop: 8 }}>
-                      <iframe
-                        src={`https://drive.google.com/file/d/${id}/preview`}
-                        width="640"
-                        height="360"
-                        allow="autoplay"
-                        title={l.label || "Drive Video"}
-                      />
-                    </div>
-                  );
-                }
-                return null;
-              })}
+        {videoEmbedUrl && (
+          <div style={{ marginTop: 12, marginBottom: 12 }}>
+            <iframe
+              width="100%"
+              height="360"
+              src={videoEmbedUrl}
+              title={project.videoTitle || project.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ border: "1px solid var(--color-border)" }}
+            />
+          </div>
+        )}
+
+        {project.methodology ? (
+          <p style={{ marginBottom: 12, fontSize: 15, lineHeight: 1.7 }}>{project.methodology}</p>
+        ) : (
+          <p style={{ marginBottom: 12, fontSize: 15, lineHeight: 1.7 }}>Methodology write-up coming soon.</p>
+        )}
+
+        {methodologyImages.length > 0 && (
+          <div style={{ marginTop: 12 }}>
+            <ImageGrid images={methodologyImages} size={190} gap={12} />
+          </div>
+        )}
+      </div>
+
+      <div style={{ marginTop: 28 }}>
+        <div className="project-detail-section-title">Results</div>
+        {project.results ? (
+          <p style={{ marginBottom: 12, fontSize: 15, lineHeight: 1.7 }}>{project.results}</p>
+        ) : (
+          <p style={{ marginBottom: 12, fontSize: 15, lineHeight: 1.7 }}>Results and discussion coming soon.</p>
+        )}
+        {resultsImages.length > 0 && (
+          <div style={{ marginTop: 12 }}>
+            <ImageGrid images={resultsImages} size={190} gap={12} />
+          </div>
+        )}
+      </div>
+
+      {lead && (
+        <div style={{ marginTop: 28 }}>
+          <div className="project-detail-section-title">Project lead</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
+            <Avatar person={lead} size={56} circle />
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 700 }}>{lead.name}</div>
+              {lead.email && (
+                <div style={{ fontSize: 13, color: "var(--color-muted)" }}>
+                  <a href={`mailto:${lead.email}`}>{lead.email}</a>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
-      </div>
-
-      {/* Results section */}
-      <div style={{ marginTop: 20 }}>
-        <div className="subsection-title">Results</div>
-        <div style={{ marginTop: 8 }}>
-          <p style={{ marginBottom: 8 }}>Results and discussion go here.</p>
-        </div>
-      </div>
+      )}
 
       <div style={{ marginTop: 28, fontSize: 14 }}>
         <a

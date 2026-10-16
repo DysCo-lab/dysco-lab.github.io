@@ -410,9 +410,28 @@ a img { border: none; }
   margin-bottom: 18px;
 }
 .project-detail h2 {
-  font-size: 22px;
-  font-weight: 600;
+  font-size: clamp(2rem, 2.6vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.15;
   margin-bottom: 8px;
+  color: var(--color-ink);
+}
+.project-detail .project-summary {
+  font-size: 1.04rem;
+  color: var(--color-muted);
+  margin-bottom: 12px;
+}
+.project-detail .project-detail-section-title {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--color-accent);
+  margin: 18px 0 10px;
+}
+.project-detail .project-detail-body p {
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
 .project-detail .people-row {
   display: flex;
