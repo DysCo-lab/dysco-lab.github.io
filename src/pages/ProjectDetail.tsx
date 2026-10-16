@@ -52,7 +52,14 @@ export default function ProjectDetail({ slug, navigate }: Props) {
     );
   }
 
-  const lead = project.leadId ? people.find((p) => p.id === project.leadId) ?? null : null;
+  const projectLeadIds = Array.isArray(project.leadIds)
+    ? project.leadIds
+    : project.leadId
+      ? project.leadId.split(",").map((id) => id.trim()).filter(Boolean)
+      : [];
+  const leads = projectLeadIds
+    .map((id) => people.find((p) => p.id === id) ?? null)
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
   const methodologyImages = project.methodologyImages ?? project.gallery ?? [];
   const resultsImages = project.resultsImages ?? [];
   const projectLinks =
@@ -186,19 +193,25 @@ export default function ProjectDetail({ slug, navigate }: Props) {
         )}
       </div>
 
-      {lead && (
+      {leads.length > 0 && (
         <div style={{ marginTop: 28 }}>
-          <div className="project-detail-section-title">Project lead</div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
-            <Avatar person={lead} size={56} circle />
-            <div>
-              <div style={{ fontSize: 15, fontWeight: 700 }}>{lead.name}</div>
-              {lead.email && (
-                <div style={{ fontSize: 13, color: "var(--color-muted)" }}>
-                  <a href={`mailto:${lead.email}`}>{lead.email}</a>
+          <div className="project-detail-section-title">
+            {leads.length > 1 ? "Project leads" : "Project lead"}
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginTop: 8 }}>
+            {leads.map((lead) => (
+              <div key={lead.id} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <Avatar person={lead} size={56} circle />
+                <div>
+                  <div style={{ fontSize: 15, fontWeight: 700 }}>{lead.name}</div>
+                  {lead.email && (
+                    <div style={{ fontSize: 13, color: "var(--color-muted)" }}>
+                      <a href={`mailto:${lead.email}`}>{lead.email}</a>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

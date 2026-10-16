@@ -513,7 +513,8 @@ export type Project = {
   videoTitle?: string;
   results?: string;
   resultsImages?: string[];
-  leadId?: string; // single person in charge for the project
+  leadIds?: string[]; // people in charge of the project
+  leadId?: string; // legacy single-lead field kept for compatibility
   memberIds?: string[]; // optional legacy field; not displayed on project pages
   longDescription: string; // can contain multiple paragraphs (use \n\n)
   links?: { label: string; url: string }[];
@@ -527,7 +528,7 @@ export const projects: Project[] = [
     image: "flutter.png",
     summary:
       "Identification of thermoacoustic instability and aeroelastic flutter using reduced-order and data-driven models.",
-    leadId: "tathagat-sarangi",
+    leadIds: ["tathagat-sarangi", "ashik-lal-krishna"],
     longDescription: "",
     links: [
       { label: "Project paper", url: "https://example.com/thermoacoustics-paper" },
@@ -540,7 +541,7 @@ export const projects: Project[] = [
     image: "LTF.png",
     summary:
       "Experimental platforms and data-driven methods for flight dynamics and control validation.",
-    leadId: "yashwanth",
+    leadIds: ["yashwanth", "neeraj-balachandar"],
     longDescription: "",
     links: [
       { label: "Project paper", url: "https://example.com/learn-to-fly-paper" },
@@ -574,7 +575,7 @@ export const projects: Project[] = [
     results:
       "The facility enables repeatable testing of UAV stability, aerodynamic response, and control under controlled disturbance fields. Results can be added here to describe observed behavior, performance trends, and validation data.",
     resultsImages: ["ww6.png","ww7.png"],
-    leadId: "misbah-tahir",
+    leadIds: ["misbah-tahir", "mandar-mane"],
     memberIds: [
       "misbah-tahir",
       "mandar-mane",
@@ -606,7 +607,7 @@ export const projects: Project[] = [
     image: "varflexi.png",
     summary:
       "Scientific machine learning, flow reconstruction, and reduced-order modeling for fluid dynamics.",
-    leadId: "ashik-lal-krishna",
+    leadIds: ["neeraj-balachandar", "yashwanth"],
     longDescription: "",
     links: [
       { label: "Project paper", url: "https://example.com/cfdm-paper" },
@@ -619,7 +620,7 @@ export const projects: Project[] = [
     image: "networks.png",
     summary:
       "Markov Processes, Clustering, Recurrence plots, and modelling cyber-physical attacks with Laplacian dynamics.",
-    leadId: "tathagat-sarangi",
+    leadIds: ["harishankar-m", "yashwanth"],
     longDescription: "",
     links: [
       { label: "Project paper", url: "https://example.com/network-oscillators-paper" },
@@ -632,7 +633,7 @@ export const projects: Project[] = [
     image: "optimalctrl.png",
     summary:
       "Hardware-in-loop control, Koopman operator control, sequential convex programming, and safe control.",
-    leadId: "yashwanth",
+    leadIds: ["yashwanth", "neeraj-balachandar"],
     longDescription: "",
     links: [
       { label: "Project paper", url: "https://example.com/dynamics-control-paper" },
@@ -651,7 +652,7 @@ export const projects: Project[] = [
       "fod3.jpg",
       "fod4.jpg",
     ],
-    leadId: "m-madhusudhan-reddy",
+    leadIds: ["akhila-shibu", "m-madhusudhan-reddy"],
     memberIds: ["m-madhusudhan-reddy", "abhinav-tj"],
     longDescription: "",
     links: [],
@@ -665,7 +666,7 @@ export const projects: Project[] = [
     gallery: [
       "vyom2.png",
     ],
-    leadId: "edmeachew-ayal",
+    leadIds: ["ashik-lal-krishna"],
     longDescription: "",
     links: [
       { label: "Project paper", url: "https://example.com/vyom-paper" },

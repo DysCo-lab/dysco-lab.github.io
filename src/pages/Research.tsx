@@ -50,10 +50,18 @@ export default function Research({ navigate }: Props) {
             </div>
             <div className="people-row">
               {(() => {
-                const lead = p.leadId ? people.find((x) => x.id === p.leadId) ?? null : null;
-                if (!lead) return null;
-                return (
+                const leadIds = Array.isArray(p.leadIds)
+                  ? p.leadIds
+                  : p.leadId
+                    ? p.leadId.split(",").map((id) => id.trim()).filter(Boolean)
+                    : [];
+                const leads = leadIds
+                  .map((id) => people.find((x) => x.id === id) ?? null)
+                  .filter((person): person is NonNullable<typeof person> => Boolean(person));
+
+                return leads.map((lead) => (
                   <a
+                    key={lead.id}
                     href={lead.website ?? "#/people"}
                     title={`${lead.name} — project lead`}
                     onClick={(e) => {
@@ -65,7 +73,7 @@ export default function Research({ navigate }: Props) {
                   >
                     <Avatar person={lead} size={34} circle />
                   </a>
-                );
+                ));
               })()}
             </div>
           </div>
