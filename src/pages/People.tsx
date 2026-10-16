@@ -32,28 +32,22 @@ export default function People() {
               <div className="people-grid">
                 {members.map((p) => (
                   <div className="person" key={p.id}>
-                    {p.website ? (
-                      <a
-                        href={p.website}
-                        target="_blank"
-                        rel="noreferrer"
-                        title={p.topic}
-                      >
-                        <Avatar person={p} size={90} circle />
-                        <div className="p-name">{p.name}</div>
-                        {g.showTopic && p.topic && (
-                          <div className="p-topic">{p.topic}</div>
-                        )}
-                      </a>
-                    ) : (
-                      <>
-                        <Avatar person={p} size={90} circle />
-                        <div className="p-name">{p.name}</div>
-                        {g.showTopic && p.topic && (
-                          <div className="p-topic">{p.topic}</div>
-                        )}
-                      </>
-                    )}
+                    <a
+                      href={p.website ?? `#/people`}
+                      target={p.website ? "_blank" : undefined}
+                      rel={p.website ? "noreferrer" : undefined}
+                      onClick={(e) => {
+                        if (!p.website) e.preventDefault();
+                      }}
+                      title={p.topic}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Avatar person={p} size={90} circle />
+                      <div className="p-name">{p.name}</div>
+                      {g.showTopic && p.topic && (
+                        <div className="p-topic">{p.topic}</div>
+                      )}
+                    </a>
                   </div>
                 ))}
               </div>
